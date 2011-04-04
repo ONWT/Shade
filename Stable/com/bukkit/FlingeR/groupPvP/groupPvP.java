@@ -44,7 +44,7 @@ public class groupPvP extends JavaPlugin {
          defaultConfig();
         }  
         loadConfig();
-        pm.registerEvent(Event.Type.ENTITY_DAMAGED, entityListener, Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
         setupPermissions();
         System.out.println("[groupPvP] Successfully loaded.");
 
