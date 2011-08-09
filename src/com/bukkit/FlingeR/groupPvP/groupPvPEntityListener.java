@@ -4,6 +4,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityListener;
 public class groupPvPEntityListener extends EntityListener {
+	@SuppressWarnings("unused")
 	private final groupPvP plugin;
 	public groupPvPEntityListener(groupPvP instance) {
 		plugin = instance;

@@ -3,7 +3,6 @@ package com.bukkit.FlingeR.groupPvP;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.Server;
@@ -48,12 +47,6 @@ public class groupPvP extends JavaPlugin {
 
 	public void onDisable() {
 		System.out.println("");
-	}
-
-	private void loadConfig() {
-	}
-
-	private void defaultConfig() {
 	}
 
 	private void setupPermissions() {

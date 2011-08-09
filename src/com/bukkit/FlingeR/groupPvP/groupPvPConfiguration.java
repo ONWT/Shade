@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
 /**
