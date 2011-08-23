@@ -45,8 +45,11 @@ public class groupPvPConfiguration
 					BufferedWriter out = new BufferedWriter(fstream);
 
 					out.write("#groupPvP config file\n");
-					out.write("#attaking:\n");
-					out.write("#- cant_attack_group");
+					out.write("#anti attack:\n");
+					out.write("#  attacking:\n");
+					out.write("#  - cant_attack_group");
+					out.write("#anti target:\n");
+					out.write("#  - untargetable_group:\n");
 					out.close();
 					fstream.close();
 					log.info(logPrefix + " Make sure to edit your config file!");
@@ -56,7 +59,7 @@ public class groupPvPConfiguration
 				{
 					log.severe(logPrefix + " Error creating default Configuration File");
 					log.severe(logPrefix + " " + ex);
-					this.plugin.getServer().getPluginManager().disablePlugin((Plugin) this);
+					this.plugin.getServer().getPluginManager().disablePlugin((Plugin) plugin);
 				}
 		}
 		
