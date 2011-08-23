@@ -56,7 +56,7 @@ public class groupPvPConfiguration
 				{
 					log.severe(logPrefix + " Error creating default Configuration File");
 					log.severe(logPrefix + " " + ex);
-					this.plugin.getServer().getPluginManager().disablePlugin((Plugin) groupPvP);
+					this.plugin.getServer().getPluginManager().disablePlugin((Plugin) plugin);
 				}
 		}
 		
