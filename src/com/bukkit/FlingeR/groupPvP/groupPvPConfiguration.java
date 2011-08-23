@@ -48,6 +48,8 @@ public class groupPvPConfiguration
 					out.write("#anti attack:\n");
 					out.write("#  attacking:\n");
 					out.write("#  - cant_attack_group");
+					out.write("#anti target:\n");
+					out.write("#  - untargetable_group:\n");
 					out.close();
 					fstream.close();
 					log.info(logPrefix + " Make sure to edit your config file!");

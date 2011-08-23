@@ -1,19 +1,23 @@
 package com.bukkit.FlingeR.groupPvP;
 import java.util.Collections;
+import java.util.List;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityListener;
+import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.util.config.ConfigurationNode;
 public class groupPvPEntityListener extends EntityListener {
 	@SuppressWarnings("unused")
 	private final groupPvP plugin;
 	private final ConfigurationNode antiAttackNode;
+	private final List<String> antiTargetList;
 	
 	public groupPvPEntityListener(groupPvP instance) {
 		plugin = instance;
 		antiAttackNode = groupPvP.config.getNode("anti attack");
+		antiTargetList = groupPvP.config.getStringList("anti target", null);
 	}
 
 	public void onEntityDamage (EntityDamageEvent event) {		
@@ -35,5 +39,17 @@ public class groupPvPEntityListener extends EntityListener {
 			noAttackMessage = noAttackMessage.replace("%g", DG);
 			attacker.sendMessage(noAttackMessage);
 		}
+	}
+	
+	public void onEntityTarget(EntityTargetEvent event) {
+		if(!(event.getTarget() instanceof Player))
+			return;
+		
+		Player targeted = (Player)event.getTarget();
+
+		String world = targeted.getWorld().getName();
+		String targetedGroup = groupPvP.Permissions.getPrimaryGroup(world, targeted.getName());
+		if (antiTargetList.contains(targetedGroup))
+			event.setCancelled(true);
 	}
 }

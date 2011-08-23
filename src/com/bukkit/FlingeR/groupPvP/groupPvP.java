@@ -4,6 +4,7 @@ import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 import java.io.File;
 import java.util.HashMap;
+
 import org.bukkit.entity.Player;
 import org.bukkit.Server;
 import org.bukkit.event.Event;
@@ -40,6 +41,8 @@ public class groupPvP extends JavaPlugin {
 
 		if(groupPvP.config.getNode("anti attack") != null) // Enable anti attack
 			pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
+		if(groupPvP.config.getStringList("anti target", null) != null) // Enable anti target
+			pm.registerEvent(Event.Type.ENTITY_TARGET, entityListener, Event.Priority.Normal, this);
 		setupPermissions();
 		System.out.println("[groupPvP] Successfully loaded.");
 
