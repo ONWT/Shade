@@ -45,7 +45,9 @@ public class groupPvPConfiguration
 					BufferedWriter out = new BufferedWriter(fstream);
 
 					out.write("#groupPvP config file\n");
-					out.write("#attacking:\n");
+					out.write("#anti attack:\n");
+					out.write("#  attacking:\n");
+					out.write("#  - cant_attack_group");
 					out.close();
 					fstream.close();
 					log.info(logPrefix + " Make sure to edit your config file!");

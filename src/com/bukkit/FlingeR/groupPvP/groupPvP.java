@@ -38,7 +38,8 @@ public class groupPvP extends JavaPlugin {
 		Server = getServer();
 		PluginManager pm = getServer().getPluginManager();
 
-		pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
+		if(groupPvP.config.getNode("anti attack") != null) // Enable anti attack
+			pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
 		setupPermissions();
 		System.out.println("[groupPvP] Successfully loaded.");
 
