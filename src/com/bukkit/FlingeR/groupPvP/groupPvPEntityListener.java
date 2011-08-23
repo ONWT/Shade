@@ -24,7 +24,7 @@ public class groupPvPEntityListener extends EntityListener {
 				if (groupPvP.config.getStringList(AG, null).contains(DG)) {
 					event.setCancelled(true);
 					String Attacker=null;
-					Attacker = groupPvP.pconfig.get("deny-attack").replace("%d", defender.getName());
+					Attacker = groupPvP.config.getString("deny-attack", "- You are not allowed to attack other players for group %g.").replace("%d", defender.getName());
 					Attacker = Attacker.replace("%g", DG);
 					attacker.sendMessage(Attacker);
 				}

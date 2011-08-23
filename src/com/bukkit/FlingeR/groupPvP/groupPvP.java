@@ -35,7 +35,6 @@ public class groupPvP extends JavaPlugin {
 		confSetup.setupConfigs();
 		config.load();
 
-		config.getString("deny-attack", "- You are not allowed to attack other players for group %g.");
 		Server = getServer();
 		PluginManager pm = getServer().getPluginManager();
 
