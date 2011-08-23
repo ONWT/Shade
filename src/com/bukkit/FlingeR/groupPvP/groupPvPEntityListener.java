@@ -16,9 +16,7 @@ public class groupPvPEntityListener extends EntityListener {
 			if ( (entEvent.getDamager() instanceof Player) && (entEvent.getEntity() instanceof Player) ) {
 				Player attacker = (Player)entEvent.getDamager();
 				Player defender = (Player)entEvent.getEntity();
-				String world = attacker.getWorld().toString();
-				world = world.replace("CraftWorld{name=", "");
-				world = world.replace("}", "");
+				String world = attacker.getWorld().getName();
 				String DG=groupPvP.Permissions.getPrimaryGroup(world,defender.getName());
 				String AG=groupPvP.Permissions.getPrimaryGroup(world,attacker.getName());
 				if (groupPvP.config.getStringList(AG, null).contains(DG)) {
