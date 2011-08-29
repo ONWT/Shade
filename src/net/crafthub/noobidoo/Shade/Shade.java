@@ -48,9 +48,9 @@ public class Shade extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 
 		if(Shade.config.getNode("anti attack") != null) // Enable anti attack
-			pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
+			pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Highest, this);
 		if(Shade.config.getStringList("anti target", null) != null) // Enable anti target
-			pm.registerEvent(Event.Type.ENTITY_TARGET, entityListener, Event.Priority.Normal, this);
+			pm.registerEvent(Event.Type.ENTITY_TARGET, entityListener, Event.Priority.Highest, this);
 		setupPermissions();
 		System.out.println("[groupPvP] Successfully loaded.");
 
