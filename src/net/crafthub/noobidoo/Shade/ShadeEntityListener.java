@@ -1,4 +1,13 @@
-package com.bukkit.FlingeR.groupPvP;
+package net.crafthub.noobidoo.Shade;
+
+/**
+ * Crafthub Shade for Bukkit
+ * @author Carfthub
+ * 
+ * Copyright 2011 AllGamer, LLC.
+ * See LICENSE for licensing information.
+ */
+
 import java.util.Collections;
 import java.util.List;
 
@@ -8,16 +17,16 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.util.config.ConfigurationNode;
-public class groupPvPEntityListener extends EntityListener {
+public class ShadeEntityListener extends EntityListener {
 	@SuppressWarnings("unused")
-	private final groupPvP plugin;
+	private final Shade plugin;
 	private final ConfigurationNode antiAttackNode;
 	private final List<String> antiTargetList;
 	
-	public groupPvPEntityListener(groupPvP instance) {
+	public ShadeEntityListener(Shade instance) {
 		plugin = instance;
-		antiAttackNode = groupPvP.config.getNode("anti attack");
-		antiTargetList = groupPvP.config.getStringList("anti target", null);
+		antiAttackNode = Shade.config.getNode("anti attack");
+		antiTargetList = Shade.config.getStringList("anti target", null);
 	}
 
 	public void onEntityDamage (EntityDamageEvent event) {		
@@ -31,11 +40,11 @@ public class groupPvPEntityListener extends EntityListener {
 		Player attacker = (Player)entEvent.getDamager();
 		Player defender = (Player)entEvent.getEntity();
 		String world = attacker.getWorld().getName();
-		String DG=groupPvP.Permissions.getPrimaryGroup(world,defender.getName());
-		String AG=groupPvP.Permissions.getPrimaryGroup(world,attacker.getName());
+		String DG=Shade.Permissions.getPrimaryGroup(world,defender.getName());
+		String AG=Shade.Permissions.getPrimaryGroup(world,attacker.getName());
 		if (antiAttackNode.getStringList(AG, Collections.<String>emptyList()).contains(DG)) {
 			event.setCancelled(true);
-			String noAttackMessage = groupPvP.config.getString("deny-attack", "- You are not allowed to attack other players for group %g.").replace("%d", defender.getName());
+			String noAttackMessage = Shade.config.getString("deny-attack", "- You are not allowed to attack other players for group %g.").replace("%d", defender.getName());
 			noAttackMessage = noAttackMessage.replace("%g", DG);
 			attacker.sendMessage(noAttackMessage);
 		}
@@ -48,7 +57,7 @@ public class groupPvPEntityListener extends EntityListener {
 		Player targeted = (Player)event.getTarget();
 
 		String world = targeted.getWorld().getName();
-		String targetedGroup = groupPvP.Permissions.getPrimaryGroup(world, targeted.getName());
+		String targetedGroup = Shade.Permissions.getPrimaryGroup(world, targeted.getName());
 		if (antiTargetList.contains(targetedGroup))
 			event.setCancelled(true);
 	}

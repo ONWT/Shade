@@ -1,4 +1,12 @@
-package com.bukkit.FlingeR.groupPvP;
+package net.crafthub.noobidoo.Shade;
+
+/**
+ * Crafthub Shade for Bukkit
+ * @author Carfthub
+ * 
+ * Copyright 2011 AllGamer, LLC.
+ * See LICENSE for licensing information.
+ */
 
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
@@ -13,22 +21,22 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.config.Configuration;
 
-public class groupPvP extends JavaPlugin {
+public class Shade extends JavaPlugin {
 	private static Server Server = null;
 	public static HashMap<String, String> pconfig = new HashMap<String, String>();
 	public static PermissionHandler Permissions;
 	public static Configuration config;
-	private groupPvPConfiguration confSetup;
-	public static String logPrefix = "[groupPvP]";
+	private ShadeConfiguration confSetup;
+	public static String logPrefix = "[Shade]";
 
-	private final groupPvPEntityListener entityListener = new groupPvPEntityListener(this);
+	private final ShadeEntityListener entityListener = new ShadeEntityListener(this);
 
 
 	public void configInit()
 	{
 		getDataFolder().mkdirs();
 		config = new Configuration(new File(this.getDataFolder(), "config.yml"));
-		confSetup = new groupPvPConfiguration(this.getDataFolder(), this);
+		confSetup = new ShadeConfiguration(this.getDataFolder(), this);
 	}
 	
 	public void onEnable() {
@@ -39,9 +47,9 @@ public class groupPvP extends JavaPlugin {
 		Server = getServer();
 		PluginManager pm = getServer().getPluginManager();
 
-		if(groupPvP.config.getNode("anti attack") != null) // Enable anti attack
+		if(Shade.config.getNode("anti attack") != null) // Enable anti attack
 			pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
-		if(groupPvP.config.getStringList("anti target", null) != null) // Enable anti target
+		if(Shade.config.getStringList("anti target", null) != null) // Enable anti target
 			pm.registerEvent(Event.Type.ENTITY_TARGET, entityListener, Event.Priority.Normal, this);
 		setupPermissions();
 		System.out.println("[groupPvP] Successfully loaded.");

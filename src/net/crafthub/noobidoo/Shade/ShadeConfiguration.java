@@ -1,4 +1,4 @@
-package com.bukkit.FlingeR.groupPvP;
+package net.crafthub.noobidoo.Shade;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,26 +9,26 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.Plugin;
 
 /**
- * CraftRepo weathercontrol for Bukkit
- * @author AllGamer
+ * Crafthub Shade for Bukkit
+ * @author Carfthub
  * 
  * Copyright 2011 AllGamer, LLC.
  * See LICENSE for licensing information.
  */
 
-public class groupPvPConfiguration 
+public class ShadeConfiguration 
 {
 
-	private groupPvP plugin;
+	private Shade plugin;
 	private File folder;
 	private final Logger log = Logger.getLogger("Minecraft");
 	private String logPrefix;
 
-	public groupPvPConfiguration(File folder, groupPvP instance) 
+	public ShadeConfiguration(File folder, Shade instance) 
 	{
 		this.folder = folder;
 		this.plugin = instance;
-		this.logPrefix = groupPvP.logPrefix;
+		this.logPrefix = Shade.logPrefix;
 	}
 
 	public void setupConfigs() 
