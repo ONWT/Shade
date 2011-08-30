@@ -17,19 +17,20 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.util.config.ConfigurationNode;
+
+import com.sun.tools.internal.jxc.gen.config.Config;
 public class ShadeEntityListener extends EntityListener {
 	@SuppressWarnings("unused")
 	private final Shade plugin;
-	private ConfigurationNode antiAttackNode;
+	private List<ConfigurationNode> antiAttackNode;
 	private List<String> antiTargetList;
 
 	public ShadeEntityListener(Shade instance) {
 		plugin = instance;
 	}
 
+	
 	public void onEntityDamage (EntityDamageEvent event) {
-		if(!event.isCancelled())
-		{
 			if (!(event instanceof EntityDamageByEntityEvent))
 				return;
 
@@ -42,17 +43,16 @@ public class ShadeEntityListener extends EntityListener {
 			String world = attacker.getWorld().getName();
 			String DG=Shade.Permissions.getPrimaryGroup(world,defender.getName());
 			String AG=Shade.Permissions.getPrimaryGroup(world,attacker.getName());
-			if(Shade.config.getNode("anti attack")!=null)
-			{
-				antiAttackNode = Shade.config.getNode("anti attack");
-				if (antiAttackNode.getStringList(AG, Collections.<String>emptyList()).contains(DG)) {
+			antiAttackNode = Shade.config.getNodeList("anti attack", Collections.<ConfigurationNode>emptyList());
+			for (ConfigurationNode node : antiAttackNode) {
+				System.out.println("contains: " + node.getStringList(AG, Collections.<String>emptyList()).toString());
+				if (node.getStringList(AG, Collections.<String>emptyList()).contains(DG)) {
 					event.setCancelled(true);
 					String noAttackMessage = Shade.config.getString("deny-attack", "- You are not allowed to attack other players for group %g.").replace("%d", defender.getName());
 					noAttackMessage = noAttackMessage.replace("%g", DG);
 					attacker.sendMessage(noAttackMessage);
 				}
 			}
-		}
 	}
 
 	public void onEntityTarget(EntityTargetEvent event) {
