@@ -18,7 +18,6 @@ import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.util.config.ConfigurationNode;
 
-import com.sun.tools.internal.jxc.gen.config.Config;
 public class ShadeEntityListener extends EntityListener {
 	@SuppressWarnings("unused")
 	private final Shade plugin;
