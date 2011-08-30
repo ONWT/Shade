@@ -30,6 +30,9 @@ public class ShadeEntityListener extends EntityListener {
 
 	
 	public void onEntityDamage (EntityDamageEvent event) {
+			if(event.isCancelled())
+				return;
+			
 			if (!(event instanceof EntityDamageByEntityEvent))
 				return;
 
@@ -55,18 +58,17 @@ public class ShadeEntityListener extends EntityListener {
 	}
 
 	public void onEntityTarget(EntityTargetEvent event) {
-		if(!event.isCancelled())
-		{
-			if(!(event.getTarget() instanceof Player))
-				return;
+		if(event.isCancelled())
+			return;
+		if(!(event.getTarget() instanceof Player))
+			return;
 
-			Player targeted = (Player)event.getTarget();
+		Player targeted = (Player)event.getTarget();
 
-			String world = targeted.getWorld().getName();
-			String targetedGroup = Shade.Permissions.getPrimaryGroup(world, targeted.getName());
-			antiTargetList = Shade.config.getStringList("anti target", Collections.<String>emptyList());
-			if (antiTargetList.contains(targetedGroup))
-				event.setCancelled(true);
-		}
+		String world = targeted.getWorld().getName();
+		String targetedGroup = Shade.Permissions.getPrimaryGroup(world, targeted.getName());
+		antiTargetList = Shade.config.getStringList("anti target", Collections.<String>emptyList());
+		if (antiTargetList.contains(targetedGroup))
+			event.setCancelled(true);
 	}
 }
